@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sindicup — Tu sindicato en Mano</title>
+<meta name="description" content="Crea tu sindicato de forma simple, guiada y 100% digital. Proceso paso a paso, asesoría legal incluida y total privacidad. Empieza gratis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1a1a2e;
+  background: #ffffff;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ===== VARIABLES ===== */
+:root {
+  --primary: #1a56db;
+  --primary-dark: #1442a8;
+  --primary-light: #e8effc;
+  --accent: #e67e22;
+  --accent-light: #fef3e6;
+  --green: #0d9f6e;
+  --green-light: #e6f7f0;
+  --bg-soft: #f8f9fc;
+  --bg-dark: #0f1629;
+  --text: #1a1a2e;
+  --text-secondary: #5a5f7a;
+  --border: #e2e5f1;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  --shadow-lg: 0 4px 6px rgba(0,0,0,0.05), 0 12px 32px rgba(0,0,0,0.08);
+  --max-width: 1140px;
+}
+
+/* ===== UTILITY ===== */
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+.section { padding: 100px 0; }
+.section-label {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 6px 14px;
+  border-radius: 50px;
+  margin-bottom: 16px;
+}
+.section-title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 640px;
+  line-height: 1.7;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 32px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(26,86,219,0.3);
+}
+.btn-primary:hover {
+  background: var(--primary-dark);
+  box-shadow: 0 4px 16px rgba(26,86,219,0.4);
+  transform: translateY(-1px);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--border);
+}
+.btn-secondary:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+.btn-accent {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(230,126,34,0.3);
+}
+.btn-accent:hover {
+  background: #d35400;
+  transform: translateY(-1px);
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  transition: box-shadow 0.3s;
+}
+.navbar.scrolled { box-shadow: var(--shadow); }
+.navbar-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+.logo {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logo svg { width: 28px; height: 28px; }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-links a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--primary); }
+.nav-cta .btn { padding: 10px 24px; font-size: 0.9rem; }
+.mobile-toggle { display: none; background: none; border: none; cursor: pointer; }
+.mobile-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  margin: 5px 0;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* ===== HERO ===== */
+.hero {
+  padding: 140px 0 100px;
+  background: linear-gradient(175deg, var(--primary-light) 0%, #ffffff 60%);
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(26,86,219,0.06) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.hero-content { position: relative; z-index: 1; }
+.hero-content h1 {
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+.hero-content h1 span { color: var(--primary); }
+.hero-content p {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  margin-bottom: 36px;
+  max-width: 500px;
+  line-height: 1.75;
+}
+.hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+.hero-trust {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.hero-trust svg { width: 16px; height: 16px; color: var(--green); flex-shrink: 0; }
+
+/* Hero visual */
+.hero-visual {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+}
+.hero-mockup {
+  width: 320px;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg), 0 0 0 1px var(--border);
+  padding: 24px;
+  position: relative;
+}
+.mockup-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.mockup-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 0.85rem;
+}
+.mockup-name { font-weight: 600; font-size: 0.9rem; }
+.mockup-role { font-size: 0.75rem; color: var(--text-secondary); }
+.mockup-steps { display: flex; flex-direction: column; gap: 16px; }
+.mockup-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--radius);
+  background: var(--bg-soft);
+  transition: 0.3s;
+}
+.mockup-step.active {
+  background: var(--primary-light);
+  border: 1px solid rgba(26,86,219,0.15);
+}
+.step-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.mockup-step.done .step-number { background: var(--green); color: #fff; }
+.mockup-step.active .step-number { background: var(--primary); color: #fff; }
+.mockup-step.pending .step-number { background: var(--border); color: var(--text-secondary); }
+.step-text { font-size: 0.8rem; font-weight: 500; line-height: 1.4; }
+.step-text small { display: block; font-weight: 400; color: var(--text-secondary); font-size: 0.72rem; margin-top: 2px; }
+.mockup-progress {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.progress-label { font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 8px; display: flex; justify-content: space-between; }
+.progress-bar { height: 6px; background: var(--border); border-radius: 10px; overflow: hidden; }
+.progress-fill { height: 100%; width: 60%; background: linear-gradient(90deg, var(--primary), var(--green)); border-radius: 10px; }
+
+/* Floating badges */
+.float-badge {
+  position: absolute;
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: var(--shadow-lg);
+  font-size: 0.78rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: floatBadge 4s ease-in-out infinite;
+}
+.float-badge.top-right { top: -10px; right: -30px; animation-delay: 0s; }
+.float-badge.bottom-left { bottom: 20px; left: -40px; animation-delay: 2s; }
+@keyframes floatBadge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.badge-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+/* ===== PROBLEMA ===== */
+.problema { background: var(--bg-soft); }
+.problema-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.problema-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+.problema-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+.problema-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+}
+.problema-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+.problema-card p { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.65; }
+.problema-close {
+  text-align: center;
+  margin-top: 48px;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.problema-close strong { color: var(--primary); font-style: normal; }
+
+/* ===== SOLUCIÓN ===== */
+.solucion-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.solucion-card {
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.solucion-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+.solucion-card:nth-child(1)::before { background: var(--primary); }
+.solucion-card:nth-child(2)::before { background: var(--green); }
+.solucion-card:nth-child(3)::before { background: var(--accent); }
+.solucion-card:nth-child(4)::before { background: #8b5cf6; }
+.solucion-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.solucion-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+}
+.solucion-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+.solucion-card p { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.65; }
+
+/* ===== CÓMO FUNCIONA ===== */
+.como-funciona { background: var(--bg-soft); }
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  margin-top: 56px;
+  position: relative;
+}
+.steps-grid::before {
+  content: '';
+  position: absolute;
+  top: 36px;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--green));
+  opacity: 0.2;
+}
+.step-card { text-align: center; position: relative; }
+.step-num {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin: 0 auto 20px;
+  position: relative;
+  z-index: 1;
+  transition: 0.3s;
+}
+.step-card:hover .step-num {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 4px 16px rgba(26,86,219,0.25);
+}
+.step-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+.step-card p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; }
+.steps-note {
+  text-align: center;
+  margin-top: 48px;
+  padding: 20px 32px;
+  background: #fff;
+  border-radius: var(--radius);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+/* ===== BENEFICIOS ===== */
+.beneficios-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.beneficio-card {
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-soft);
+  border: 1px solid transparent;
+  transition: 0.3s;
+}
+.beneficio-card:hover {
+  border-color: var(--border);
+  background: #fff;
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+.beneficio-emoji { font-size: 2rem; margin-bottom: 16px; display: block; }
+.beneficio-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+.beneficio-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; }
+
+/* ===== PARA QUIÉN ===== */
+.paraquien { background: var(--bg-soft); }
+.perfiles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.perfil-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  text-align: center;
+  border: 1px solid var(--border);
+  transition: 0.3s;
+}
+.perfil-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-3px);
+}
+.perfil-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+}
+.perfil-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+.perfil-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+.paraquien-close {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+/* ===== FAQ ===== */
+.faq-list {
+  max-width: 760px;
+  margin: 48px auto 0;
+}
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: left;
+  gap: 16px;
+  transition: color 0.2s;
+}
+.faq-question:hover { color: var(--primary); }
+.faq-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bg-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: 0.3s;
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+}
+.faq-item.active .faq-icon {
+  background: var(--primary);
+  color: #fff;
+  transform: rotate(45deg);
+}
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+}
+.faq-answer-inner {
+  padding: 0 0 24px;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ===== CTA FINAL ===== */
+.cta-final {
+  background: var(--bg-dark);
+  color: #fff;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-final::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(26,86,219,0.15) 0%, transparent 60%);
+  border-radius: 50%;
+}
+.cta-final .container { position: relative; z-index: 1; }
+.cta-final .section-title { color: #fff; }
+.cta-final p {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.7);
+  max-width: 560px;
+  margin: 0 auto 40px;
+  line-height: 1.75;
+}
+.cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
+.cta-trust {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.cta-trust span { display: flex; align-items: center; gap: 4px; }
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--bg-dark);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 48px 0 32px;
+  color: rgba(255,255,255,0.4);
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.footer-brand .logo { color: rgba(255,255,255,0.8); }
+.footer-tagline { font-size: 0.82rem; margin-top: 4px; }
+.footer-links { display: flex; gap: 24px; font-size: 0.85rem; }
+.footer-links a { transition: color 0.2s; }
+.footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+/* ===== ANIMATIONS ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .hero .container { grid-template-columns: 1fr; text-align: center; }
+  .hero-content p { margin-left: auto; margin-right: auto; }
+  .hero-buttons { justify-content: center; }
+  .hero-trust { justify-content: center; }
+  .hero-visual { margin-top: 40px; }
+  .float-badge.top-right { right: 0; }
+  .float-badge.bottom-left { left: 0; }
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps-grid::before { display: none; }
+  .perfiles-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .section { padding: 72px 0; }
+  .nav-links { display: none; }
+  .mobile-toggle { display: block; }
+  .problema-grid { grid-template-columns: 1fr; }
+  .solucion-grid { grid-template-columns: 1fr; }
+  .beneficios-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; gap: 24px; }
+  .perfiles-grid { grid-template-columns: 1fr; }
+  .hero { padding: 120px 0 72px; }
+  .hero-mockup { width: 280px; }
+}
+
+/* Mobile sticky CTA */
+.mobile-cta {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  padding: 12px 24px;
+  border-top: 1px solid var(--border);
+  z-index: 999;
+}
+.mobile-cta .btn { width: 100%; justify-content: center; }
+@media (max-width: 768px) {
+  .mobile-cta { display: block; }
+  body { padding-bottom: 72px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="#" class="logo">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="28" height="28" rx="8" fill="currentColor" opacity="0.1"/>
+        <path d="M9 13.5C9 10.46 11.46 8 14.5 8h0c1.38 0 2.63.51 3.54 1.34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M8 16h12M10 19h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="14" cy="13" r="2" fill="currentColor"/>
+      </svg>
+      Sindicup
+    </a>
+    <div class="nav-links">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#beneficios">Beneficios</a>
+      <a href="#faq">FAQ</a>
+      <div class="nav-cta">
+        <a href="#cta-final" class="btn btn-primary">Empieza gratis</a>
+      </div>
+    </div>
+    <button class="mobile-toggle" onclick="this.classList.toggle('open')" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1>Tu sindicato, paso a paso<br>y <span>desde el móvil</span></h1>
+      <p>La plataforma que simplifica crear un sindicato. Proceso guiado, asesoría legal incluida y todo 100&nbsp;% digital. Tu sindicato en Mano, literalmente.</p>
+      <div class="hero-buttons">
+        <a href="#cta-final" class="btn btn-primary">Empieza gratis <span>→</span></a>
+        <a href="#como-funciona" class="btn btn-secondary">Ver cómo funciona</a>
+      </div>
+      <div class="hero-trust">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M8 1L2 4v4c0 3.5 2.5 6.4 6 7 3.5-.6 6-3.5 6-7V4L8 1z" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 8.5L7 10l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Tus datos están protegidos. No compartimos nada con tu empresa.
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-mockup">
+        <div class="float-badge top-right">
+          <div class="badge-icon" style="background:var(--green-light);color:var(--green);">✓</div>
+          100 % digital
+        </div>
+        <div class="float-badge bottom-left">
+          <div class="badge-icon" style="background:var(--primary-light);color:var(--primary);">⚡</div>
+          Listo en días
+        </div>
+        <div class="mockup-header">
+          <div class="mockup-avatar">TÚ</div>
+          <div>
+            <div class="mockup-name">Tu proceso</div>
+            <div class="mockup-role">Sindicato en curso</div>
+          </div>
+        </div>
+        <div class="mockup-steps">
+          <div class="mockup-step done">
+            <div class="step-number">✓</div>
+            <div class="step-text">Datos iniciales<small>Completado</small></div>
+          </div>
+          <div class="mockup-step done">
+            <div class="step-number">✓</div>
+            <div class="step-text">Hoja de ruta<small>Completado</small></div>
+          </div>
+          <div class="mockup-step active">
+            <div class="step-number">3</div>
+            <div class="step-text">Documentación<small>En progreso...</small></div>
+          </div>
+          <div class="mockup-step pending">
+            <div class="step-number">4</div>
+            <div class="step-text">Registro oficial<small>Pendiente</small></div>
+          </div>
+        </div>
+        <div class="mockup-progress">
+          <div class="progress-label"><span>Progreso</span><span>60 %</span></div>
+          <div class="progress-bar"><div class="progress-fill"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROBLEMA ===== -->
+<section class="section problema" id="problema">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">El problema</span>
+      <h2 class="section-title">Crear un sindicato no debería<br>ser tan difícil</h2>
+      <p class="section-subtitle">Quieres organizarte con tu equipo, pero no sabes por dónde empezar. Y no eres la única persona que se siente así.</p>
+    </div>
+    <div class="problema-grid">
+      <div class="problema-card reveal">
+        <div class="problema-icon" style="background:#fef2f2;color:#dc2626;">📋</div>
+        <h3>Burocracia interminable</h3>
+        <p>Formularios, estatutos, actas, registros… El proceso legal parece diseñado para que abandones antes de empezar.</p>
+      </div>
+      <div class="problema-card reveal">
+        <div class="problema-icon" style="background:#fefce8;color:#ca8a04;">❓</div>
+        <h3>Dudas legales sin respuesta</h3>
+        <p>¿Qué derechos tengo? ¿Me pueden despedir? ¿Qué necesito exactamente? Buscar respuestas claras se convierte en un laberinto.</p>
+      </div>
+      <div class="problema-card reveal">
+        <div class="problema-icon" style="background:#fdf4ff;color:#a855f7;">🗺️</div>
+        <h3>Falta de guía real</h3>
+        <p>No hay una ruta clara. La información está dispersa, desactualizada o escrita en un lenguaje que nadie entiende.</p>
+      </div>
+      <div class="problema-card reveal">
+        <div class="problema-icon" style="background:#fff7ed;color:#ea580c;">😶</div>
+        <h3>Miedo y desinformación</h3>
+        <p>Crear un sindicato sigue rodeado de estigma y mitos. Muchas personas no dan el paso porque no saben que es más sencillo de lo que parece.</p>
+      </div>
+    </div>
+    <p class="problema-close reveal">No es que la gente no quiera organizarse. Es que el proceso no se lo pone fácil. <strong>Hasta ahora.</strong></p>
+  </div>
+</section>
+
+<!-- ===== SOLUCIÓN ===== -->
+<section class="section" id="solucion">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">La solución</span>
+      <h2 class="section-title">Sindicup convierte un proceso complejo<br>en algo que puedes hacer desde tu móvil</h2>
+      <p class="section-subtitle">Hemos rediseñado todo el camino para que sea claro, digital y acompañado. Sin sorpresas, sin tecnicismos y sin que tengas que ser experto en nada.</p>
+    </div>
+    <div class="solucion-grid">
+      <div class="solucion-card reveal">
+        <div class="solucion-icon" style="background:var(--primary-light);color:var(--primary);">🧭</div>
+        <h3>Todo guiado</h3>
+        <p>Te llevamos de la mano en cada paso. Desde entender qué es un sindicato hasta tener el tuyo registrado oficialmente. Sin saltos, sin huecos.</p>
+      </div>
+      <div class="solucion-card reveal">
+        <div class="solucion-icon" style="background:var(--green-light);color:var(--green);">💻</div>
+        <h3>100 % digital</h3>
+        <p>Nada de desplazamientos ni ventanillas. Todo el proceso se hace online, desde cualquier dispositivo, cuando tú quieras.</p>
+      </div>
+      <div class="solucion-card reveal">
+        <div class="solucion-icon" style="background:var(--accent-light);color:var(--accent);">⚖️</div>
+        <h3>Con respaldo legal</h3>
+        <p>No estás solo. Nuestro equipo de asesoría legal revisa cada paso contigo para que todo esté bien hecho desde el principio.</p>
+      </div>
+      <div class="solucion-card reveal">
+        <div class="solucion-icon" style="background:#f3e8ff;color:#8b5cf6;">🔒</div>
+        <h3>Privado y seguro</h3>
+        <p>Tu información es tuya. Usamos cifrado de extremo a extremo y nunca compartimos datos con terceros. Ni con tu empresa, ni con nadie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CÓMO FUNCIONA ===== -->
+<section class="section como-funciona" id="como-funciona">
+  <div class="container">
+    <div class="reveal" style="text-align:center;">
+      <span class="section-label">Cómo funciona</span>
+      <h2 class="section-title">De la idea al sindicato en 4 pasos</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">1</div>
+        <h3>Cuéntanos tu situación</h3>
+        <p>Rellena un breve formulario con los datos de tu empresa y equipo. Solo lo básico, nada invasivo.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">2</div>
+        <h3>Recibe tu hoja de ruta</h3>
+        <p>Te generamos un plan personalizado con los pasos exactos según tu caso, comunidad autónoma y tipo de empresa.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">3</div>
+        <h3>Prepara la documentación</h3>
+        <p>Con nuestras plantillas y la revisión legal incluida, tendrás todo listo: estatutos, acta fundacional y formularios.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">4</div>
+        <h3>Registra tu sindicato</h3>
+        <p>Te acompañamos hasta el registro oficial. Y después también: te ayudamos a dar los primeros pasos.</p>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:48px;" class="reveal">
+      <div class="steps-note">
+        💬&nbsp; ¿Tienes dudas en cualquier momento? Nuestro equipo está disponible por chat para resolverlas al instante.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BENEFICIOS ===== -->
+<section class="section" id="beneficios">
+  <div class="container">
+    <div class="reveal" style="text-align:center;">
+      <span class="section-label">Beneficios</span>
+      <h2 class="section-title">¿Por qué elegir Sindicup?</h2>
+    </div>
+    <div class="beneficios-grid">
+      <div class="beneficio-card reveal">
+        <span class="beneficio-emoji">📖</span>
+        <h3>Claridad legal sin jerga</h3>
+        <p>Todo explicado en un lenguaje que se entiende. Sabrás qué haces y por qué en cada paso.</p>
+      </div>
+      <div class="beneficio-card reveal">
+        <span class="beneficio-emoji">🤝</span>
+        <h3>Acompañamiento real</h3>
+        <p>No te dejamos solo con una guía genérica. Asesoría legal personalizada, chat en directo y un equipo que responde de verdad.</p>
+      </div>
+      <div class="beneficio-card reveal">
+        <span class="beneficio-emoji">⚡</span>
+        <h3>Rápido de verdad</h3>
+        <p>Lo que antes llevaba semanas, con Sindicup puede estar listo en días. Tu tiempo vale, y lo sabemos.</p>
+      </div>
+      <div class="beneficio-card reveal">
+        <span class="beneficio-emoji">🛡️</span>
+        <h3>Privacidad como prioridad</h3>
+        <p>Cifrado, acceso restringido y cero cesión de datos. Tu proceso es confidencial. Punto.</p>
+      </div>
+      <div class="beneficio-card reveal">
+        <span class="beneficio-emoji">✨</span>
+        <h3>Simple como usar una app</h3>
+        <p>Si sabes pedir comida a domicilio, sabes usar Sindicup. Interfaz limpia y sin complicaciones.</p>
+      </div>
+      <div class="beneficio-card reveal">
+        <span class="beneficio-emoji">📱</span>
+        <h3>Desde cualquier dispositivo</h3>
+        <p>Móvil, tablet u ordenador. Avanza en tu proceso cuando quieras y desde donde quieras.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PARA QUIÉN ===== -->
+<section class="section paraquien" id="paraquien">
+  <div class="container">
+    <div class="reveal" style="text-align:center;">
+      <span class="section-label">Para quién es</span>
+      <h2 class="section-title">Si te identificas con algo de esto,<br>Sindicup es para ti</h2>
+    </div>
+    <div class="perfiles-grid">
+      <div class="perfil-card reveal">
+        <div class="perfil-icon" style="background:var(--primary-light);">🚀</div>
+        <h3>Trabajas en una startup</h3>
+        <p>Equipos pequeños, mucho ritmo, pocos recursos para temas legales. Te damos estructura sin que pares todo.</p>
+      </div>
+      <div class="perfil-card reveal">
+        <div class="perfil-icon" style="background:var(--green-light);">👩‍💻</div>
+        <h3>Eres parte de un equipo tech</h3>
+        <p>Desarrolladores, diseñadores, producto, datos… Organizarse no es solo para fábricas. Tu sector también necesita voz.</p>
+      </div>
+      <div class="perfil-card reveal">
+        <div class="perfil-icon" style="background:var(--accent-light);">🌱</div>
+        <h3>Quieres empezar pero no sabes cómo</h3>
+        <p>No tienes experiencia sindical y solo buscas un punto de partida claro. Eso es exactamente lo que hacemos.</p>
+      </div>
+      <div class="perfil-card reveal">
+        <div class="perfil-icon" style="background:#f3e8ff;">📲</div>
+        <h3>Valoras lo digital y lo directo</h3>
+        <p>Nada de reuniones eternas ni procesos arcaicos. Algo que funcione como las herramientas que usas cada día.</p>
+      </div>
+    </div>
+    <p class="paraquien-close reveal">No importa si sois 5 o 500. Si queréis organizaros, estamos aquí para que lo hagáis bien.</p>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="reveal" style="text-align:center;">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title">Respuestas a lo que (casi)<br>todo el mundo pregunta</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Crear un sindicato es legal?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Sí, totalmente. Es un derecho fundamental recogido en la Constitución Española (artículo 28) y en el Estatuto de los Trabajadores. Sindicup simplemente te facilita el proceso.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Puede mi empresa enterarse de que estoy en el proceso?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">No. Tu actividad en Sindicup es completamente privada. No contactamos con tu empresa ni compartimos datos con nadie. Tú decides cuándo y cómo comunicar lo que quieras.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Me pueden despedir por crear un sindicato?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">La ley protege expresamente a las personas que ejercen su derecho a la libertad sindical. Un despido por esta razón sería nulo. Desde Sindicup te informamos de tus derechos en cada paso.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Cuántas personas se necesitan para crear un sindicato?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Legalmente no hay un mínimo de personas trabajadoras para constituir un sindicato. Sindicup te orienta sobre el número recomendable según tu situación.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Cuánto tiempo tarda el proceso?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Depende del caso, pero con Sindicup es mucho más rápido que por la vía tradicional. En muchos casos, la documentación puede estar lista en menos de una semana.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Cuánto cuesta?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Sindicup tiene un plan gratuito para explorar la plataforma. Los planes con acompañamiento legal tienen un coste accesible que puedes consultar en nuestra página de precios.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Sindicup es un sindicato?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">No. Sindicup es una plataforma tecnológica que te ayuda a crear el tuyo. No somos un sindicato, no tenemos afiliación ni posición política. Somos una herramienta.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Funciona para cualquier tipo de empresa?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Sí. Startups, pymes, grandes empresas, tech, consultoras… El proceso legal es similar en todos los casos, y Sindicup se adapta a tu contexto.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA FINAL ===== -->
+<section class="section cta-final" id="cta-final">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">Tu equipo merece estar organizado.<br>Y tú mereces que sea fácil.</h2>
+      <p>Empieza hoy. Crea tu cuenta, explora la plataforma y descubre lo sencillo que es tener tu sindicato en Mano. Sin compromiso, sin coste inicial y con todo el acompañamiento que necesites.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-accent">Crear mi cuenta gratis →</a>
+        <a href="#" class="btn btn-secondary" style="color:#fff;border-color:rgba(255,255,255,0.2);">Solicitar una demo personalizada</a>
+      </div>
+      <div class="cta-trust">
+        <span>Sin tarjeta de crédito</span>
+        <span>·</span>
+        <span>Cancelación en cualquier momento</span>
+        <span>·</span>
+        <span>Tus datos siempre protegidos</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo">
+          <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:22px;">
+            <rect width="28" height="28" rx="8" fill="currentColor" opacity="0.1"/>
+            <path d="M9 13.5C9 10.46 11.46 8 14.5 8h0c1.38 0 2.63.51 3.54 1.34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M8 16h12M10 19h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="14" cy="13" r="2" fill="currentColor"/>
+          </svg>
+          Sindicup
+        </div>
+        <div class="footer-tagline">Tu sindicato en Mano.</div>
+      </div>
+      <div class="footer-links">
+        <a href="#">Política de privacidad</a>
+        <a href="#">Términos de uso</a>
+        <a href="#">Contacto</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== MOBILE STICKY CTA ===== -->
+<div class="mobile-cta">
+  <a href="#cta-final" class="btn btn-primary">Empieza gratis →</a>
+</div>
+
+<!-- ===== JS ===== -->
+<script>
+// Navbar shadow on scroll
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// FAQ accordion
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const answer = item.querySelector('.faq-answer');
+  const isActive = item.classList.contains('active');
+
+  // Close all
+  document.querySelectorAll('.faq-item').forEach(el => {
+    el.classList.remove('active');
+    el.querySelector('.faq-answer').style.maxHeight = null;
+  });
+
+  // Open clicked if wasn't active
+  if (!isActive) {
+    item.classList.add('active');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
+}
+
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+revealEls.forEach(el => revealObserver.observe(el));
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 80;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
